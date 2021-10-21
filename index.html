@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>graphic x web</title>
+		<meta name="description" content="Twisted spheres with Three.js" />
+		<meta name="keywords" content="three.js, webgl, sphere, twisted, animation" />
+		<meta name="author" content="Codrops" />
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="https://use.typekit.net/dmq3uhj.css">
+		<link rel="stylesheet" type="text/css" href="css/base.css" />
+        <link type="text/css" rel="stylesheet" href="/style.css" />
+		<script>document.documentElement.className="js";var supportsCssVars=function(){var e,t=document.createElement("style");return t.innerHTML="root: { --tmp-var: bold; }",document.head.appendChild(t),e=!!(window.CSS&&window.CSS.supports&&window.CSS.supports("font-weight","var(--tmp-var)")),t.parentNode.removeChild(t),e};supportsCssVars()||alert("Please view this demo in a modern browser that supports CSS Variables.");</script>
+	
+        <script src="three.js"></script>
+        <script type="module" src="GLTFLoader.js"></script>
+
+        <!--THREE JS-->
+        <script type="module">
+            import {GLTFLoader} from "./GLTFLoader.js";
+        
+            var scene = new THREE.Scene();
+            var WIDTH = 950;
+            var HEIGHT = 950;
+            var camera = new THREE.PerspectiveCamera(
+                75,
+                WIDTH / HEIGHT,
+                0.01,
+                1000
+            );
+            var renderer = new THREE.WebGLRenderer();
+            renderer.setSize(WIDTH, HEIGHT);
+
+            var container = document.getElementById('threeCanvas');
+            //document.body.appendChild(renderer.domElement);
+            document.body.appendChild( container );
+            container.appendChild(renderer.domElement);
+        
+            var loader = new GLTFLoader();
+        
+            var obj;
+            loader.load("zak-glasses.gltf", function(gltf){
+                obj = gltf.scene;
+                scene.add(gltf.scene);
+            })
+            scene.background = new THREE.Color(0x000000)
+            var light = new THREE.HemisphereLight(0xffffff, 0x000000, 2)
+            scene.add(light);
+            camera.position.set(0,170,400);
+            function animate() {
+                requestAnimationFrame(animate);
+                obj.rotation.y += 0.05;
+                renderer.render(scene,camera);
+            }
+            animate();
+        </script>
+
+    
+    </head>
+	<body class="demo-2 loading">
+		<main>
+			<a class="logo dib desktop" aria-label="Wave logo homepage">~</a>
+			<h2 class="page-title line line--vertical"><div class="dib" style="--clip: 100%;">
+포트폴리오</div></h2>
+			<nav class="demos">
+				<div class="dib oh"><a href="/work" class="frame__demo">work</a></div>
+				<div class="dib oh"><a href="/clients" class="frame__demo">clients</a></div>
+				<div class="dib oh"><a href="/about" class="frame__demo">about</a></div>
+				<div class="dib oh"><a href="/contact" class="frame__demo">contact</a></div>
+			</nav>
+			<nav class="links line line--vertical">
+				<!--<div class="dib oh"><a href="https://tympanus.net/Development/OnScrollLetterAnimations/" class="dib">Previous demo</a></div>
+				<div class="dib oh"><a href="https://tympanus.net/codrops/?p=52932" class="dib">Article</a></div>	
+				<div class="dib oh"><a href="https://github.com/codrops/WebGLBlobs" class="dib">GitHub</a></div>-->
+			</nav>
+			<div class="menu line line--vertical"><div class="menu__inner"><div class="oh"><div class="menu__inner-translate">2021</div></div></div></div>
+			<h1 class="title line line--horizontal oh"><div>Zak Knowlton</div></h1>
+			<div class="subtitle oh"><div>graphic × web</div></div>
+			<p class="content line line--horizontal desktop">
+				<span class="db copy" style="--clip: 0%;">
+				ZAK KNOWLTON IS A DESIGNER X WEB DEVELOPER WORKING PRIMARILY WITHIN THE MUSIC AND ENTERTAINMENT INDUSTRY. ZAK HAS CREATED ARTWORK AND WEBSITES FOR GRAMMY AWARD WINNING AND PLATINUM SELLING ARTISTS. HIS WORK CAN BE SEEN ON TOUR, IN RETAIL STORES AND ONLINE. THE PORTFOLIO YOU ARE CURRENTLY VIEWING CONTAINS SELECTED PROJECTS. FOR ALL COLLABORATIONS AND PROJECTS, PLEASE CLICK THE CONTACT TAB. THANK YOU.
+				
+				<br><br>
+				40.7608° N, 111.8910° W
+				<br>
+				{Salt Lake City, UT}
+				</span>
+			</p>
+			
+			<p class="content line line--horizontal mobile">
+				<span class="db copy" style="--clip: 0%;">
+				ZAK KNOWLTON IS A DESIGNER X WEB DEVELOPER IN THE MUSIC AND ENTERTAINMENT INDUSTRY. ZAK HAS CREATED ARTWORK AND WEBSITES FOR GRAMMY AWARD WINNING AND PLATINUM SELLING ARTISTS. HIS WORK CAN BE SEEN ON TOUR, IN RETAIL STORES AND ONLINE.
+				
+				<br><br>
+				40.7608° N, 111.8910° W
+				<br>
+				{Salt Lake City, UT}
+				</span>
+			</p>
+			
+			<!--<span class="play dib" aria-label="Play">&#9658;</span>-->
+			<span class="feature dib" aria-label="feature">
+            
+			<div id="threeCanvas"></div>
+			
+			</span>
+			<!--<span class="feature dib" aria-label="feature">
+			<video autoplay muted loop id="vidFeature">
+  			<source src="https://zakknowlton.com/wp-content/uploads/2021/10/Glass-Heart-EXPLOSION-NEW2.mp4" type="video/mp4">
+			</video>
+			</span>-->
+			<a class="credits credits--site line line--vertical" href="https://twitter.com/TheZakKnowlton"><div class="credits--site-inner oh"><div></div></div></a>
+			<span class="credits credits--author line line--horizontal"><div class="dib link" style="--clip: 100%;"><a href="https://twitter.com/TheZakKnowlton">@TheZakKnowlton</div></a></span> 
+			<div class="year oh"><div>2021</div></div>
+		</main>
+		<script src="./scripts/index2.js"></script>
+	</body>
+</html>
