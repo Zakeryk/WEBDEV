@@ -21,8 +21,8 @@
             import {GLTFLoader} from "./GLTFLoader.js";
         
             var scene = new THREE.Scene();
-            var WIDTH = 950;
-            var HEIGHT = 950;
+            var WIDTH = window.innerWidth;
+            var HEIGHT = window.innerHeight;
             var camera = new THREE.PerspectiveCamera(
                 75,
                 WIDTH / HEIGHT,
@@ -47,13 +47,36 @@
             scene.background = new THREE.Color(0x000000)
             var light = new THREE.HemisphereLight(0xffffff, 0x000000, 2)
             scene.add(light);
-            camera.position.set(0,170,400);
-            function animate() {
+            camera.position.set(0,170, 400);
+
+            /*function animate() {
                 requestAnimationFrame(animate);
                 obj.rotation.y += 0.05;
                 renderer.render(scene,camera);
             }
-            animate();
+            animate();*/
+
+			// Control
+			var mouseTolerance = 0.5;
+
+			document.onmousemove=function(e){
+ 			var centerX = window.innerWidth * 0.5 + 600;
+  			var centerY = window.innerHeight * 0.5 + 300;
+  
+  			obj.rotation.y = (e.clientX - centerX) / centerX * mouseTolerance;
+  			obj.rotation.x = (e.clientY - centerY) / centerY * mouseTolerance;
+  
+			};
+
+			//Render loop
+			function render() {
+			requestAnimationFrame( render );
+			renderer.render( scene, camera );
+			}
+			render();
+
+
+
         </script>
 
     
