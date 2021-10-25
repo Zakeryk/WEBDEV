@@ -3,13 +3,13 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>graphic x web</title>
+		<title>Zak Knowlton — Freelance Graphic x Design</title>
 		<meta name="description" content="Twisted spheres with Three.js" />
 		<meta name="keywords" content="three.js, webgl, sphere, twisted, animation" />
 		<meta name="author" content="Codrops" />
 		<link rel="shortcut icon" href="favicon.ico">
 		<link rel="stylesheet" href="https://use.typekit.net/dmq3uhj.css">
-		<link rel="stylesheet" type="text/css" href="css/base.css" />
+		<!-- <link rel="stylesheet" type="text/css" href="css/base.css" /> -->
         <link type="text/css" rel="stylesheet" href="/style.css" />
 		<script>document.documentElement.className="js";var supportsCssVars=function(){var e,t=document.createElement("style");return t.innerHTML="root: { --tmp-var: bold; }",document.head.appendChild(t),e=!!(window.CSS&&window.CSS.supports&&window.CSS.supports("font-weight","var(--tmp-var)")),t.parentNode.removeChild(t),e};supportsCssVars()||alert("Please view this demo in a modern browser that supports CSS Variables.");</script>
 	
@@ -21,6 +21,7 @@
             import {GLTFLoader} from "./GLTFLoader.js";
         
             var scene = new THREE.Scene();
+			var mouseout = 0;
             var WIDTH = window.innerWidth;
             var HEIGHT = window.innerHeight;
             var camera = new THREE.PerspectiveCamera(
@@ -44,17 +45,48 @@
                 obj = gltf.scene;
                 scene.add(gltf.scene);
             })
+
+
+
+							// // car paint
+
+							// let material = new THREE.MeshPhysicalMaterial( {
+							// 	clearcoat: 1.0,
+							// 	clearcoatRoughness: 0.1,
+							// 	metalness: 0.9,
+							// 	roughness: 0.5,
+							// 	color: 0x0000ff,
+							// 	normalMap: normalMap3,
+							// 	normalScale: new THREE.Vector2( 0.15, 0.15 )
+							// } );
+
+							// let mesh = new THREE.Mesh( geometry, material );
+							// mesh.position.x = - 100;
+							// mesh.position.y = 100;
+							// group.add( mesh );
+
+							// // fibers
+
+							// material = new THREE.MeshPhysicalMaterial( {
+							// 	roughness: 0.5,
+							// 	clearcoat: 1.0,
+							// 	clearcoatRoughness: 0.1,
+							// 	map: diffuse,
+							// 	normalMap: normalMap
+							// } );
+							// mesh = new THREE.Mesh( geometry, material );
+							// mesh.position.x = 100;
+							// mesh.position.y = 100;
+							// group.add( mesh );
+
+
+
+
+
             scene.background = new THREE.Color(0x000000)
             var light = new THREE.HemisphereLight(0xffffff, 0x000000, 2)
             scene.add(light);
             camera.position.set(0,170, 400);
-
-            /*function animate() {
-                requestAnimationFrame(animate);
-                obj.rotation.y += 0.05;
-                renderer.render(scene,camera);
-            }
-            animate();*/
 
 			// Control
 			var mouseTolerance = 0.5;
@@ -75,7 +107,42 @@
 			}
 			render();
 
+			function addEvent(obj, evt, fn) {
+   			 if (obj.addEventListener) {
+     		   obj.addEventListener(evt, fn, false);
+   			 }
+   		 else if (obj.attachEvent) {
+     	   obj.attachEvent("on" + evt, fn);
+   	 }
+}
 
+addEvent(document, "mouseout", function(e) {
+    e = e ? e : window.event;
+    var from = e.relatedTarget || e.toElement;
+    if (!from || from.nodeName == "HTML") {
+        // stop your drag event here
+        // for now we can just use an alert
+        mouseout = 1;
+		console.log(mouseout)
+    } else {
+		mouseout = 0;
+		console.log(mouseout)
+	}
+});
+
+while (mouseout == 1) {
+	function spin() {
+                requestAnimationFrame(spin);
+				obj.rotation.x = 0;
+                obj.rotation.y += 0.05;
+                renderer.render(scene,camera);
+            }
+            spin();
+}
+
+
+
+			console.log(mouseout);
 
         </script>
 
@@ -137,6 +204,6 @@
 			<span class="credits credits--author line line--horizontal"><div class="dib link" style="--clip: 100%;"><a href="https://twitter.com/TheZakKnowlton">@TheZakKnowlton</div></a></span> 
 			<div class="year oh"><div>2021</div></div>
 		</main>
-		<script src="./scripts/index2.js"></script>
+		<!-- <script src="./scripts/index2.js"></script> -->
 	</body>
 </html>
